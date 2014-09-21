@@ -13,6 +13,164 @@ from apps.models import (
     Comment
 )
 
+from google.appengine.api import images
+from google.appengine.ext import blobstore
+from google.appengine.ext import db
+
+
+class Photo(db.Model):
+    photo = db.BlobProperty()
+
+
+from google.appengine.api import images
+from google.appengine.ext import blobstore
+from google.appengine.ext import db
+
+
+class Photo(db.Model):
+    photo = db.BlobProperty()
+
+
+#
+# @index & article list
+#
+@app.route('/', methods=['GET'])
+def article_list():
+    # html 파일에 전달할 데이터 Context
+    context = {}
+
+    # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
+    context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
+
+    return render_template('home.html', context=context, active_tab='timeline')
+
+
+#
+# @article controllers
+#
+@app.route('/article/create/', methods=['GET', 'POST'])
+def article_create():
+    form = ArticleForm()
+    photokey = None
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            if form.photo.data:
+                print "form photo"
+                photodata = request.files['photo'].read()
+                upload_data = Photo()
+                upload_data.photo = db.Blob(photodata)
+                upload_data.put()
+                photokey = upload_data.key()
+
+            # 사용자가 입력한 글 데이터로 Article 모델 인스턴스를 생성한다.
+            article = Article(
+                title=form.title.data,
+                author=form.author.data,
+                category=form.category.data,
+                content=form.content.data,
+                photo=str(photokey)
+            )
+
+            # 데이터베이스에 데이터를 저장할 준비를 한다. (게시글)
+            mydb.session.add(article)
+            # 데이터베이스에 저장하라는 명령을 한다.
+            mydb.session.commit()
+
+            flash(u'게시글을 작성하였습니다.', 'success')
+            return redirect(url_for('article_list'))
+
+    return render_template('article/create.html', form=form, active_tab='article_create')
+
+
+@app.route('/article/detail/<int:id>', methods=['GET'])
+def article_detail(id):
+    article = Article.query.get(id)
+    # comments = Comment.query.order_by(desc(Comment.date_created)).filter_by(article=article)
+
+    # relationship을 활용한 query
+    comments = article.comments.order_by(desc(Comment.date_created)).all()
+
+    return render_template('article/detail.html', article=article, comments=comments)
+
+
+@app.route('/article/update/<int:id>', methods=['GET', 'POST'])
+def article_update(id):
+    article = Article.query.get(id)
+    form = ArticleForm(request.form, obj=article)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            form.populate_obj(article)
+            mydb.session.commit()
+        return redirect(url_for('article_detail', id=id))
+
+    return render_template('article/update.html', form=form)
+
+
+@app.route('/article/delete/<int:id>', methods=['GET', 'POST'])
+def article_delete(id):
+    if request.method == 'GET':
+        return render_template('article/delete.html', article_id=id)
+    elif request.method == 'POST':
+        article_id = request.form['article_id']
+        article = Article.query.get(article_id)
+        mydb.session.delete(article)
+        mydb.session.commit()
+
+        flash(u'게시글을 삭제하였습니다.', 'success')
+        return redirect(url_for('article_list'))
+
+
+#
+# @comment controllers
+#
+@app.route('/comment/create/<int:article_id>', methods=['GET', 'POST'])
+def comment_create(article_id):
+    form = CommentForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            # comment = Comment(
+            #     author=form.author.data,
+            #     email=form.email.data,
+            #     content=form.content.data,
+            #     password=form.password.data,
+            #     article_id=article_id
+            # )
+            comment = Comment(
+                author=form.author.data,
+                email=form.email.data,
+                content=form.content.data,
+                password=form.password.data,
+                article=Article.query.get(article_id)
+            )
+
+            mydb.session.add(comment)
+            mydb.session.commit()
+
+            flash(u'댓글을 작성하였습니다.', 'success')
+        return redirect(url_for('article_detail', id=article_id))
+    return render_template('comment/create.html', form=form)
+
+
+@app.route('/photo/get/<path:blob_key>/', methods=['GET'])
+def photo_get(blob_key):
+    uploaded_photo = db.get(blob_key)
+    return app.response_class(uploaded_photo.photo)
+
+#
+# @error Handlers
+#
+# Handle 404 errors
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+# Handle 500 errors
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('500.html'), 500
+
+
 """
 #
 #@before request

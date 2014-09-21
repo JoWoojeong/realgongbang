@@ -23,7 +23,7 @@ handlers:
   mime_type: image
   static_files: \1
   upload: (.*\.(bmp|gif|ico|jpeg|jpg|png|JPG))
-  
+
 ### libraries: import third-party libraries in python 2.7 ###
 libraries:
 - name: jinja2

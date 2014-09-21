@@ -17,8 +17,9 @@ class User(mydb.Model):
 class Article(mydb.Model):
     id = mydb.Column(mydb.Integer, primary_key=True)
     title = mydb.Column(mydb.String(255))
-    #key = 
+    photo = mydb.Column(mydb.Text(255))
     content = mydb.Column(mydb.Text())
+    user_id = mydb.Column(mydb.Integer, primary_key=True)
     category = mydb.Column(mydb.String(255))
     date_created = mydb.Column(mydb.DateTime(), default=mydb.func.now())
 
