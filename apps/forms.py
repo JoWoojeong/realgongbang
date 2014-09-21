@@ -3,7 +3,8 @@ from flask.ext.wtf import Form
 from wtforms import (
     StringField,
     PasswordField,
-    TextAreaField
+    TextAreaField,
+    FileField
 )
 from wtforms import validators
 from wtforms.fields.html5 import EmailField
@@ -28,9 +29,12 @@ class ArticleForm(Form):
     category = StringField(
         u'카테고리',
         [validators.data_required(u'카테고리를 입력하시기 바랍니다.')],
-        description={'placeholder': u'카테고리를 입력하세요.'}
+        description={'placeholder': u'카테고리를 입력하세요.'})
+    photo = FileField(
+        u'사진',
+        [validators.data_required(u'사진을 선택하시기 바랍니다.')],
+        description={'placeholder': u'사진을 선택하세요.'})
     )
-
 
 class CommentForm(Form):
     content = StringField(
@@ -53,8 +57,6 @@ class CommentForm(Form):
         [validators.data_required(u'이메일을 입력하시기 바랍니다.')],
         description={'placeholder': u'이메일을 입력하세요.'}
     )
-
-
 class JoinForm(Form):
     email = EmailField(
         u'이메일',

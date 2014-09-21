@@ -2,7 +2,7 @@
 
 {% block contents %}
     <div class="llArticleCreate">
-        <form role="form" method="post">
+        <form role="form" method="post" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
 
             {% if form.errors %}

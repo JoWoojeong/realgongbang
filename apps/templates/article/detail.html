@@ -10,6 +10,12 @@
             </div>
             <div class="panel-body">
                 {{ article.content|safe }}
+
+                {% if article.photo %}
+                    <div class="llArticlePhoto">
+                        <img src="{{ url_for('photo_get', blob_key=article.photo) }}">
+                    </div>
+                {% endif %}
             </div>
         </div>
 

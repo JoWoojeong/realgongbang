@@ -16,7 +16,7 @@ class Config(object):
 class Production(Config):
     debug = True
     CSRF_ENABLED = False
-    ADMIN = "tkdwnsdigh@gmail.com"
-    SQLALCHEMY_DATABASE_URI = 'mysql+gaerdbms:///blog?instance=shaamy-simplic-project:simplic-board-sample'
+    ADMIN = "chowj375@gmail.com"
+    SQLALCHEMY_DATABASE_URI = 'mysql+gaerdbms:///gongbang?instance=likelion3:dbtest1'
     migration_directory = 'migrations'
 

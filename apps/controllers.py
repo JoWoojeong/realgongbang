@@ -3,14 +3,17 @@ from flask import render_template, request, redirect, url_for, flash, g, session
 from werkzeug.security import generate_password_hash, \
      check_password_hash
 from sqlalchemy import desc
-from apps import app, db
+from apps import app, mydb
 from apps.forms import ArticleForm, CommentForm, JoinForm, LoginForm
 from apps.models import (
+    User,
     Article,
-    Comment,
-    User
+    Process,
+    Inspire,
+    Comment
 )
 
+"""
 #
 #@before request
 #
@@ -215,3 +218,4 @@ def page_not_found(e):
 @app.errorhandler(500)
 def server_error(e):
     return render_template('500.html'), 500
+"""
