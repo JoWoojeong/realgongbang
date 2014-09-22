@@ -13,6 +13,7 @@ class User(mydb.Model):
     name = mydb.Column(mydb.String(255))
     email = mydb.Column(mydb.String(255))
     password = mydb.Column(mydb.String(255))
+    place_name = mydb.Column(mydb.String(255))
 
 class Article(mydb.Model):
     id = mydb.Column(mydb.Integer, primary_key=True)
