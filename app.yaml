@@ -19,10 +19,10 @@ handlers:
 - url: .*
   script: apps.app
 
-- url: /(.*\.(bmp|gif|ico|jpeg|jpg|png|JPG))
+- url: /(.*\.(bmp|gif|ico|jpeg|jpg|png|JPG|PNG))
   mime_type: image
   static_files: \1
-  upload: (.*\.(bmp|gif|ico|jpeg|jpg|png|JPG))
+  upload: (.*\.(bmp|gif|ico|jpeg|jpg|png|JPG|PNG))
 
 ### libraries: import third-party libraries in python 2.7 ###
 libraries:
