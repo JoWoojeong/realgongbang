@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        <ul class="nav navbar-nav menuright">
+         	{% if active_tab == 'showwindow' %} 
+          	<li class="active"><a href="{{ url_for('article_list') }}">진열장으로 가기</a></li>
+       	    {% endif %}
+            {% if active_tab == 'gongbang' %}
+            <li class="active"><a href="{{ url_for('article_create') }}">공방으로 가기</a></li>
+            {% endif %}
+            <li><div class="circle nevmenu menubtnred"></div></li>
+            <li><div class="circle nevmenu menubtnblue"></div></li>
+        </ul>
+        <div class="jumbotron"> 
+            <div class="container"> <h1>진열장</h1> <p>show window</p> </div> 
+        </div> 
+    </div>
+</nav>

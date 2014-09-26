@@ -4,11 +4,14 @@
     <div class="llArticleList">
         {% if context.article_list %}
             {% for article in context.article_list %}
+                
+            
                 <div class="img-thumbnail" id="article_{{ article.id }}">
-                    <div id="overlay" class="polaroid">
+                	<div id="overlay" class="polaroid">
+                    <div>   </div>
                     <h1><a href="{{ url_for('article_detail', id=article.id) }}">{{ article.title }}</a></h1>
                     <h3>{{ article.author }}</h3>
-                    <h6>{{ article.date_created.strftime('%Y-%m-%d') }}</h6>
+                    
 
 
                     <p>
@@ -22,5 +25,6 @@
                 글이 존재하지 않습니다. 새로운 글을 등록해주세요.
             </div>
         {% endif %}
+        환상의 나라 에버랜드로!!
     </div>
 {% endblock %}

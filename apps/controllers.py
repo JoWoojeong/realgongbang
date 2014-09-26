@@ -31,10 +31,19 @@ def article_list():
     context = {}
 
     # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
-    context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
+   # context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
 
-    return render_template('home.html', context=context, active_tab='timeline')
+    return render_template('showwindow/home.html', context=context, active_tab='showwindow')
 
+@app.route('/firstPage', methods=['GET'])
+def firstPage():
+    # html 파일에 전달할 데이터 Context
+    context = {}
+
+    # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
+   # context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
+
+    return render_template('index.html', context=context, active_tab='home')
 
 #
 # @article controllers

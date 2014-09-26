@@ -19,6 +19,73 @@
     border:solid #fff;
     border-width:6px 6px 20px 6px;
     box-shadow:1px 1px 5px #333; /* Standard blur at 5px. Increase for more depth */
-    height:200px; /*Set to height of your image or desired div*/
+    height:230px; /*Set to height of your image or desired div*/
     width:200px; /*Set to width of your image or desired div*/
 }
+.circle {
+    width: 50px;
+    height: 50px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px; 
+}
+.menubtnred{
+    background-color: #d88;
+}
+.menubtnblue{
+    background-color: #88d;
+}
+.menuright{
+    float: right;
+}
+
+#overlay {
+    top: 200px; 
+    left: 200px; 
+    height: 230px; 
+    width: 200px; 
+    overflow: hidden;
+}
+.nav li {color: #5a5a5a; font-size: 11px; font-weight: bold; padding: 14px 10px; text-transform: uppercase; } 
+.nav a {color: #5a5a5a; font-size: 11px; font-weight: bold; padding: 14px 10px; text-transform: uppercase; } 
+.jumbotron {background-image:url("http://cfile90.uf.daum.net/R682x0/19408A234C5BF25F9D0CCF"); height: 200px; }
+.jumbotron h1 {color: #fff; font-size: 48px; font-family: "Shift", sans-serif; font-weight: bold; } 
+.jumbotron p {font-size: 20px; color: #fff; } 
+.learn-more {background-color: #f7f7f7; } 
+.learn-more h3 {font-family: "Shift", sans-serif; font-weight: bold; font-size: 18px; } 
+.learn-more a {color: #00b0ff; } 
+.nav li {display: inline; } 
+.nav ul {float: left} 
+.jumbotron .container {position: relative; top:80px; } 
+.neighborhood-guides {background-color: #ffcccc; border-bottom: 1px solid #dbdbdb; } 
+.neighborhood-guides h2 {color: #393c3d; font-size: 24px; } 
+.neighborhood-guides p {font-size: 15px; margin-bottom: 13px; } 
+.container ul:</style> </head> <body> <div class="nav"> <div class="container"> <style type="text/css">
+.codep-highlight-mwky7fd2PC {
+    -webkit-animation: codep-highlight-fade 2.5s 1;
+    -moz-animation:    codep-highlight-fade 2.5s 1;
+    -o-animation:      codep-highlight-fade 2.5s 1;
+    -ms-animation:     codep-highlight-fade 2.5s 1;
+    animation:         codep-highlight-fade 2.5s 1;
+  }
+
+  @-webkit-keyframes codep-highlight-fade {
+    0%   { background-color: rgba(57, 209, 180, 0.7); }
+    100% { background-color: transparent; }
+  }
+  @-moz-keyframes codep-highlight-fade {
+    0%   { background-color: rgba(57, 209, 180, 0.7); }
+    100% { background-color: transparent; }
+  }
+  @-ms-keyframes codep-highlight-fade {
+    0%   { background-color: rgba(57, 209, 180, 0.7); }
+    100% { background-color: transparent; }
+  }
+  @-o-keyframes codep-highlight-fade {
+    0%   { background-color: rgba(57, 209, 180, 0.7); }
+    100% { background-color: transparent; }
+  }
+  @keyframes codep-highlight-fade {
+    0%   { background-color: rgba(57, 209, 180, 0.7); }
+    100% { background-color: transparent; }
+  }
