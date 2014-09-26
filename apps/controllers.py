@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, request, redirect, url_for, flash, g, session
-from werkzeug.security import generate_password_hash, \
-     check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import desc
 from apps import app, mydb
 from apps.forms import ArticleForm, CommentForm, JoinForm, LoginForm
