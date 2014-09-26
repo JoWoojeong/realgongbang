@@ -3,17 +3,22 @@
     text-align: center;
 }
 
-.float-right {
-    float: right;
-}
 
-.bottomButtons {
-    margin: 10px 0px 0px 0px;
-    padding: 10px;
-    text-align: center;
+.bottomButton {
+	margin: 10px 0px 0px 0px;
+	padding: 10px;
+	text-align: center;
 }
 
 .llCommentList {
-    margin: 10px 0px 0px 0px;
+	margin: 10px 0px 0px 0px;
 }
 
+.polaroid {
+    background:#fff; /*Change this to a background image or remove*/
+    border:solid #fff;
+    border-width:6px 6px 20px 6px;
+    box-shadow:1px 1px 5px #333; /* Standard blur at 5px. Increase for more depth */
+    height:200px; /*Set to height of your image or desired div*/
+    width:200px; /*Set to width of your image or desired div*/
+}
