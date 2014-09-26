@@ -34,7 +34,7 @@ class ArticleForm(Form):
         u'사진',
         [validators.data_required(u'사진을 선택하시기 바랍니다.')],
         description={'placeholder': u'사진을 선택하세요.'})
-    )
+
 
 class CommentForm(Form):
     content = StringField(
@@ -43,7 +43,18 @@ class CommentForm(Form):
         description={'placeholder': u'내용을 입력하세요.'}
     )
 
+
 class JoinForm(Form):
+    id = StringField(
+        u'아이디',
+        [validators.data_required(u'아이디를 입력하시기 바랍니다.')],
+        description={'placeholder': u'아이디를 입력하세요.'}
+    )
+    name = StringField(
+        u'이름',
+        [validators.data_required(u'이름을 입력하시기 바랍니다.')],
+        description={'placeholder': u'이름을 입력하세요.'}
+    )
     email = EmailField(
         u'이메일',
         [validators.data_required(u'이메일을 입력하시기 바랍니다.')],
@@ -60,16 +71,8 @@ class JoinForm(Form):
         [validators.data_required(u'패스워드를 한번 더 입력하세요.')],
         description={'placeholder': u'패스워드를 한번 더 입력하세요.'}
     )
-    name = StringField(
-        u'이름',
-        [validators.data_required(u'이름을 입력하시기 바랍니다.')],
-        description={'placeholder': u'이름을 입력하세요.'}
-    )
-    id = StringField(
-        u'아이디',
-        [validators.data_required(u'아이디를 입력하시기 바랍니다.')],
-        description={'placeholder': u'아이디를 입력하세요.'}
-    )
+    
+
 
 
 class LoginForm(Form):

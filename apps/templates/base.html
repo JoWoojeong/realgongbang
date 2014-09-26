@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko-kr">
 <head>
-    <STYLE type="text/css">
-#overlay {
-    top: 200px; 
-    left: 200px; 
-    height: 200px; 
-    width: 200px; 
-    overflow: hidden;
-}
-</STYLE>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Likelion Flaskr</title>
@@ -22,10 +13,9 @@
     {% endblock %}
 </head>
 <body>
-    <span class="float-left">
+    <span class= "float-left">
         <strong>{{g.user_name}}</strong>({{g.user_id}})님 안녕하세요./<a href = "/logout">로그아웃</a>
     </span>
-    
 {% block layout %}{% endblock %}
 
 {% block scripts %}
@@ -33,7 +23,6 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 {% endblock %}
-
-
 </body>
 </html>
+

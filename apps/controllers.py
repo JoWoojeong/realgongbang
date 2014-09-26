@@ -13,19 +13,10 @@ from apps.models import (
     Comment
 )
 
+#blobstore=db (사진), database=mydb 로 하는 것.
 from google.appengine.api import images
 from google.appengine.ext import blobstore
 from google.appengine.ext import db
-
-
-class Photo(db.Model):
-    photo = db.BlobProperty()
-
-
-from google.appengine.api import images
-from google.appengine.ext import blobstore
-from google.appengine.ext import db
-
 
 class Photo(db.Model):
     photo = db.BlobProperty()
@@ -155,6 +146,62 @@ def comment_create(article_id):
 def photo_get(blob_key):
     uploaded_photo = db.get(blob_key)
     return app.response_class(uploaded_photo.photo)
+
+#우정이가 추가한 부분
+@app.route('/user/join/', methods=['GET', 'POST'])
+def user_join():
+    form = JoinForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = User(
+                id = form.id.data,
+                name=form.name.data,
+                email=form.email.data,
+                password=generate_password_hash(form.password.data)
+                
+            )
+
+            mydb.session.add(user)
+            mydb.session.commit()
+
+            #flash(u'가입이 완료 되었습니다.', 'success')
+            #수정
+            return redirect(url_for('article_list'))
+
+    #if GET
+    return render_template('user/join.html', form=form, active_tab='user_join')
+
+@app.route('/user/login', methods=['GET','POST'])
+def user_login():
+    form = LoginForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            id = form.id.data
+            pwd = form.password.data
+
+            user = User.query.get(id)
+            if user is None:
+                flash(u'존재하지 않는 id입니다.', 'danger')
+            elif not check_password_hash(user.password, pwd):
+                flash(u'pw가 일치하지 않습니다.', 'danger')
+            else:
+                session.permanent = True
+                session['user_id'] = user.id
+                session['user_name'] = user.name
+
+                flash(u'로그인 완료.', 'success')
+                return redirect(url_for('article_list'))
+    #if GET
+    return render_template('user/login.html', form = form, active_tab='log_in')
+
+@app.route('/logout')
+def log_out():
+    session.clear()
+    #if GET
+    return redirect(url_for('article_list'))
+
 
 #
 # @error Handlers

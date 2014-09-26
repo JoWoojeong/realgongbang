@@ -9,7 +9,7 @@ from apps import mydb
 #
 
 class User(mydb.Model):
-    user_id = mydb.Column(mydb.Integer, primary_key=True)
+    id = mydb.Column(mydb.String(255), primary_key=True)
     name = mydb.Column(mydb.String(255))
     email = mydb.Column(mydb.String(255))
     password = mydb.Column(mydb.String(255))
@@ -28,14 +28,14 @@ class Process(mydb.Model):
     id_P = mydb.Column(mydb.Integer, primary_key=True)
     content = mydb.Column(mydb.Text())
     #key = 
-    A_id = mydb.Column(mydb.Integer, mydb.ForeignKey('Article.id'))
+    A_id = mydb.Column(mydb.Integer, mydb.ForeignKey('article.id'))
     article = mydb.relationship('Article',
                               backref=mydb.backref('comments', cascade='all, delete-orphan', lazy='dynamic'))
 
 class Inspire(mydb.Model):
     id_I = mydb.Column(mydb.Integer, primary_key=True)
     #key = 
-    A_id = mydb.Column(mydb.Integer, mydb.ForeignKey('Article.id'))
+    A_id = mydb.Column(mydb.Integer, mydb.ForeignKey('article.id'))
     article = mydb.relationship('Article',
                               backref=mydb.backref('comments', cascade='all, delete-orphan', lazy='dynamic'))
 
@@ -43,7 +43,7 @@ class Comment(mydb.Model):
     id_C = mydb.Column(mydb.Integer, primary_key=True)
     user_id = mydb.Column(mydb.Integer, primary_key=True)
     content = mydb.Column(mydb.Text())
-    A_id = mydb.Column(mydb.Integer, mydb.ForeignKey('Article.id'))
+    A_id = mydb.Column(mydb.Integer, mydb.ForeignKey('article.id'))
     date_created = mydb.Column(mydb.DateTime(), default=mydb.func.now())
 
 
