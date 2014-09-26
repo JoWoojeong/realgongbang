@@ -1,8 +1,8 @@
-{% extends "layout.html" %}
+{% extends "layout_gong.html" %}
 
 {% block contents %}
-    <div class="llArticleCreate">
-        <form role="form" method="post" enctype="multipart/form-data">
+    <div class="llCommentCreate">
+        <form role="form" method="post">
             {{ form.hidden_tag() }}
 
             {% if form.errors %}
@@ -23,7 +23,7 @@
                 {{ render_field(field, class="form-control") }}
             {% endfor %}
 
-            <button type="submit" class="btn btn-default">글쓰기</button>
+            <button type="submit" class="btn btn-default">댓글쓰기</button>
         </form>
     </div>
 {% endblock %}

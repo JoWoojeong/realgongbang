@@ -1,21 +1,22 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Likelion Flaskr</a>
+            <a class="navbar-brand" href="#">Logo</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li{% if active_tab == 'timeline' %} class="active"{% endif %}><a href="{{ url_for('article_list') }}">타임라인</a></li>
-
-            <li{% if active_tab == 'article_create' %} class="active"{% endif %}><a href="{{ url_for('article_create') }}">글쓰기</a></li>
-            
-            <li{% if active_tab == 'user_join' %} class="active"{% endif %}><a href="{{ url_for('user_join') }}">회원가입</a></li>
-            {% if g.user_name != None %}
-
-            {% else %}
-            <li{% if active_tab == 'log_in' %} class="active"{% endif %}><a href="{{ url_for('log_in') }}">로그인</a></li>
+        <ul class="nav navbar-nav menuright">
+         	{% if active_tab == 'showwindow' %} 
+          	<li class="active"><a href="{{ url_for('article_list') }}">진열장으로 가기</a></li>
+       	    {% endif %}
+            {% if active_tab == 'gongbang' %}
+            <li class="active"><a href="{{ url_for('article_create') }}">공방으로 가기</a></li>
             {% endif %}
+            <li><div class="circle nevmenu menubtnred"></div></li>
+            <li><div class="circle nevmenu menubtnblue"></div></li>
         </ul>
+        {% if active_tab == 'showwindow' %} 
+        <div class="jumbotron"> 
+            <div class="container"> <h1>진열장</h1> <p>show window</p> </div> 
+        </div> 
+        {% endif %}
     </div>
 </nav>
-
-

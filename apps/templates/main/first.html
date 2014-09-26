@@ -1,10 +1,41 @@
-{% extends "layout2.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>GongBang</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/first_main.css">
+	<script src="static/js/first_main.js"></script>
 
-{% block contents %}
-    <div class="llArticleList">
-       
-<!-- 진자 등을 써서 내용을 넣으면 됨!!-->
+<!--	<link rel="stylesheet" type="text/css" href="/static/css/lightbox.css">
+	<script src="static/js/lightbox.min.js"></script>
+-->
+</head>
+<body>
+
+	</div color>
+	<div class="row">
+		<div class="col-md-2"><img class="example-image" src="show/{{ items.key() }}" alt=""></div>
+		<div class="col-md-8"><img class="example-image" src="show/{{ items.key() }}" alt=""></div>
+		<div class="col-md-2"><img class="example-image" src="show/{{ items.key() }}" alt=""></div>
+	</div>
+
+	<div id="cbp-fwslider" class="cbp-fwslider">
 
 
-    </div>
-{% endblock %}
+	<ul>
+		{% items = 0 %}
+		{% for items in main_list %}
+		<li><img src="show/{{ items.key() }}" /></li>
+		{% endfor %}
+	</ul>
+
+</div>
+
+
+	<a class="example-image-link" href="show/{{ items.key() }}" data-lightbox="example-set">
+	<img class="example-image" src="show/{{ items.key() }}" alt="">
+	</a>
+	
+	
+</body>
+</html>
