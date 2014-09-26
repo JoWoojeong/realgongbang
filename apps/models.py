@@ -9,7 +9,7 @@ from apps import mydb
 #
 
 class User(mydb.Model):
-    user_id = mydb.Column(mydb.String(255), primary_key=True)
+    id = mydb.Column(mydb.String(255), primary_key=True)
     name = mydb.Column(mydb.String(255))
     email = mydb.Column(mydb.String(255))
     password = mydb.Column(mydb.String(255))
