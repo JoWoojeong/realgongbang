@@ -4,7 +4,26 @@
     <div class="llArticleList">
        
 <!-- 진자 등을 써서 내용을 넣으면 됨!!-->
-
+        <div class="accordian">
+            <ul>
+                <li>
+                    <div class="image_title">
+                        <a>진열장가기</a>
+                    </div>
+                    <a href="{{ url_for('article_list') }}">
+                        <img src="http://tottori.japanpr.com/files/attach/images/10526/393/059/sub2.jpg"/>
+                    </a>
+                </li>
+                <li>
+                    <div class="image_title">
+                        <a>공방가기</a>
+                    </div>
+                    <a href="{{ url_for('home_gong') }}">
+                        <img src="http://cfile1.uf.tistory.com/image/0203EB3C50FEC673245629"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
     </div>
 {% endblock %}

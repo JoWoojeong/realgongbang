@@ -51,6 +51,12 @@ def choice():
     #context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
     return render_template('main/choice.html', active_tab='choice', item="")
 
+@app.route('/home_gong/', methods=['GET'])
+def home_gong():
+    user_id = session['user_id']
+    context={}
+    context['mypage_list']=Article.query.order_by(desc(Article.date_created)).get(user_id).all()
+    return render_template("home_gong.html", context=context, active_tab = 'home_gong')
 
 
 
