@@ -116,7 +116,7 @@ default width = 800/5 = 160px;
 */
 
 .accordian {
-  width: 805px; height: 320px;
+  width: 600px; height: 400px;
   overflow: hidden;
   
   /*Time for some styling*/
@@ -168,7 +168,7 @@ default width = 800/5 = 160px;
 .image_title {
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
-  left: 0; bottom: 0; 
+  left: 300; bottom: 200; 
 width: 640px; 
 
 }
@@ -177,5 +177,5 @@ width: 640px;
   color: #fff;
   text-decoration: none;
   padding: 20px;
-  font-size: 16px;
+  font-size: 20px;
 }
