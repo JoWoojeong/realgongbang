@@ -40,7 +40,7 @@ def first():
 
     # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
     #context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
-    return render_template('main/first.html', active_tab='first')
+    return render_template('main/first.html', active_tab='first', item="")
 
 @app.route('/home_show', methods=['GET'])
 def article_list():
@@ -53,13 +53,6 @@ def article_list():
     return render_template('home_show.html', context=context, active_tab='home_show')
 
 
-@app.route('/home_gong', methods=['GET'])
-def mypage_list():
-    user_id = session['user_id']
-    context={}
-    context['mypage_list']=Article.query.order_by(desc(Article.date_created)).get(user_id).all()
-
-    return render_template('home_gong.html', context=context, active_tab = 'gongbang')
 #
 # @index & article list
 #
