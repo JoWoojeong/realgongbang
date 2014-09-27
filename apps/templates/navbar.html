@@ -14,14 +14,14 @@
             <li class="active"><a href="{{ url_for('article_create') }}">
             글쓰기</a></li>
             {% endif %}
-
-            <li><div class="circle">
-                <h1>공방가기</h1></div></li>
-            <li><div class="circle">
-                <h1>진열장가기</h1></div></li>
-            <li><div class="circle_nevmenu_menubtnred"></div></li>
-            <li><div class="circle_nevmenu_menubtnblue"></div></li>
-            
+            <div class="topbar">
+                <li><div class="circle">
+                    <h1>공방가기</h1></div></li>
+                <li><div class="circle">
+                    <h1>진열장가기</h1></div></li>
+                <li><div class="circle_nevmenu_menubtnred"></div></li>
+                <li><div class="circle_nevmenu_menubtnblue"></div></li>
+            </div>
         </ul>
         {% if active_tab == 'home_show' %} 
         <div class="jumbotron"> 
