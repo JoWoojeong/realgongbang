@@ -9,12 +9,14 @@ from apps import mydb
 #
 
 class User(mydb.Model):
-    id = mydb.Column(mydb.String(255), primary_key=True)
+    user_id = mydb.Column(mydb.String(255), primary_key=True)
     name = mydb.Column(mydb.String(255))
     email = mydb.Column(mydb.String(255))
     password = mydb.Column(mydb.String(255))
     place_name = mydb.Column(mydb.String(255))
 
+
+#article 에 author 뺐습니다.
 class Article(mydb.Model):
     id = mydb.Column(mydb.Integer, primary_key=True)
     title = mydb.Column(mydb.String(255))

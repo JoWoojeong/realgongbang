@@ -21,9 +21,32 @@ class Photo(db.Model):
     photo = db.BlobProperty()
 
 
+# 컨트롤러 엄청 수정했어. 9.27
+
+@app.route('/', methods=['GET'])
+def first():
+    # html 파일에 전달할 데이터 Context
+    context = {}
+
+    # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
+   # context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
+
+    return render_template('main/first.html', context=context, active_tab='first')
+
+@app.route('/home_show', methods=['GET'])
+def article_list():
+    # html 파일에 전달할 데이터 Context
+    context = {}
+
+    # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
+    context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
+
+    return render_template('main/home_show.html', context=context, active_tab='home_show')
+
 #
 # @index & article list
 #
+"""
 @app.route('/', methods=['GET'])
 def article_list():
     # html 파일에 전달할 데이터 Context
@@ -32,7 +55,7 @@ def article_list():
     # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
    # context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
 
-    return render_template('showwindow/home.html', context=context, active_tab='showwindow')
+    return render_template('home_show.html', context=context, active_tab='showwindow')
 
 @app.route('/firstPage', methods=['GET'])
 def firstPage():
@@ -42,8 +65,9 @@ def firstPage():
     # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
     context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
 
-    return render_template('index.html', context=context, active_tab='home')
+    return render_template('main/first.html', context=context, active_tab='home')
 
+"""
 #
 # @article controllers
 #
@@ -64,7 +88,6 @@ def article_create():
             # 사용자가 입력한 글 데이터로 Article 모델 인스턴스를 생성한다.
             article = Article(
                 title=form.title.data,
-                author=form.author.data,
                 category=form.category.data,
                 content=form.content.data,
                 photo=str(photokey)
@@ -150,10 +173,12 @@ def comment_create(article_id):
     return render_template('comment/create.html', form=form)
 
 
+#포토 컨트롤러 다시 한번 봐야 할 것 같아요.
 @app.route('/photo/get/<path:blob_key>/', methods=['GET'])
 def photo_get(blob_key):
     uploaded_photo = db.get(blob_key)
     return app.response_class(uploaded_photo.photo)
+
 
 #우정이가 추가한 부분
 @app.route('/user/join/', methods=['GET', 'POST'])
@@ -163,7 +188,7 @@ def user_join():
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User(
-                id = form.id.data,
+                user_id = form.user_id.data,
                 name=form.name.data,
                 email=form.email.data,
                 password=generate_password_hash(form.password.data)
@@ -178,7 +203,7 @@ def user_join():
             return redirect(url_for('article_list'))
 
     #if GET
-    return render_template('user/join.html', form=form, active_tab='user_join')
+    return render_template('main/join.html', form=form, active_tab='user_join')
 
 @app.route('/user/login', methods=['GET','POST'])
 def user_login():
@@ -186,17 +211,17 @@ def user_login():
 
     if request.method == 'POST':
         if form.validate_on_submit():
-            id = form.id.data
+            user_id = form.user_id.data
             pwd = form.password.data
 
-            user = User.query.get(id)
+            user = User.query.get(user_id)
             if user is None:
                 flash(u'존재하지 않는 id입니다.', 'danger')
             elif not check_password_hash(user.password, pwd):
                 flash(u'pw가 일치하지 않습니다.', 'danger')
             else:
                 session.permanent = True
-                session['user_id'] = user.id
+                session['user_id'] = user.user_id
                 session['user_name'] = user.name
 
                 flash(u'로그인 완료.', 'success')
