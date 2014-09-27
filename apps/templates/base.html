@@ -13,8 +13,9 @@
     {% endblock %}
 </head>
 <body>
+
     <span class= "float-left">
-        <strong>{{g.user_name}}</strong>({{g.user_id}})님 안녕하세요./<a href = "/logout">로그아웃</a>
+        ({{g.user_id}})님 안녕하세요./<a href = "/logout">로그아웃</a>
     </span>
 {% block layout %}{% endblock %}
 

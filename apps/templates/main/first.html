@@ -13,31 +13,9 @@
 <body>
 
 	<p>이곳은 공방입니다</p>
-	
-	</div color>
-	<div class="row">
-		<div class="col-md-2"><img class="example-image" src="show/{{ items.key() }}" alt=""></div>
-		<div class="col-md-8"><img class="example-image" src="show/{{ items.key() }}" alt=""></div>
-		<div class="col-md-2"><img class="example-image" src="show/{{ items.key() }}" alt=""></div>
+	<div class = "first" style = "background-color: blue, width: 500px, height:200, border : 20px solid black, font-size: 100px">	
+		말
 	</div>
-
-	<div id="cbp-fwslider" class="cbp-fwslider">
-
-
-	<ul>
-		{% items = 0 %}
-		{% for items in main_list %}
-		<li><img src="show/{{ items.key() }}" /></li>
-		{% endfor %}
-	</ul>
-
-</div>
-
-
-	<a class="example-image-link" href="show/{{ items.key() }}" data-lightbox="example-set">
-	<img class="example-image" src="show/{{ items.key() }}" alt="">
-	</a>
-	
 	
 </body>
 </html>

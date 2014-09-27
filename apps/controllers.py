@@ -23,14 +23,23 @@ class Photo(db.Model):
 
 # 컨트롤러 엄청 수정했어. 9.27
 
+@app.before_request
+def befor_request():
+    g.user_name = None
+
+    if 'user_id' in session:
+        g.user_name = session['user_name']
+        #id 로 수정함.
+        g.user_id = session['user_id']
+
+
 @app.route('/', methods=['GET'])
 def first():
     # html 파일에 전달할 데이터 Context
-    context = {}
+    #context = {}
 
     # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
-    context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
-
+    #context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
     return render_template('main/first.html', active_tab='first')
 
 @app.route('/home_show', methods=['GET'])
@@ -49,8 +58,8 @@ def mypage_list():
     user_id = session['user_id']
     context={}
     context['mypage_list']=Article.query.order_by(desc(Article.date_created)).get(user_id).all()
-    
-    return render_template("home_gong.html", context=context, active_tab = 'gongbang')
+
+    return render_template('home_gong.html', context=context, active_tab = 'gongbang')
 #
 # @index & article list
 #

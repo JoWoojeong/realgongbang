@@ -3,6 +3,13 @@
     text-align: center;
 }
 
+.first {
+    background-color: blue;
+    width: 500px; 
+    height:200;
+    border : 20px solid black;
+    font-size: 100px;
+}
 
 .bottomButton {
 	margin: 10px 0px 0px 0px;

@@ -6,13 +6,14 @@
             {% for article in context.article_list %}
                 <div class="img-thumbnail" id="article_{{ article.id }}">
                     <div id="overlay" class="polaroid">
-                    <div>   </div>
-                    <h1><a href="{{ url_for('article_detail', id=article.id) }}">{{ article.title }}</a></h1>
-                    <h3>{{ article.author }}</h3>
+                        <div>   </div>
+                        <h1><a href="{{ url_for('article_detail', id=article.id) }}">{{ article.title }}</a></h1>
+                        <h3>{{ article.author }}</h3>
 
-                    <p>
-                        {{ article.content|truncate(50)|safe }}
-                    </p>
+                        <p>
+                            {{ article.content|truncate(50)|safe }}
+                        </p>
+                    </div>
                 </div>
             {% endfor %}
         {% else %}
@@ -20,6 +21,7 @@
                 글이 존재하지 않습니다. 새로운 글을 등록해주세요.
             </div>
         {% endif %}
+        에버랜드로!!
     </div>
 {% endblock %}
 
