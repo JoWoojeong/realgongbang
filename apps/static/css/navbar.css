@@ -4,8 +4,8 @@
     cursor: pointer;
     position: relative;
     margin: 0 auto;
-    width: 15em; 
-    height: 15em;
+    width: 30px; 
+    height: 30px;
     overflow: hidden;
     transform: translateZ(0);
 }
@@ -14,7 +14,7 @@
     color: rgba(189, 185, 199,0);
     font-family: 'Lato', sans-serif;
     font-weight: 900;
-    font-size: 1.6em;
+    font-size: 30px;
     line-height: 8.2em;
     text-align: center;
     text-transform: uppercase;
