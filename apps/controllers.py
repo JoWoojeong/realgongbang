@@ -43,7 +43,7 @@ def first():
     return render_template('main/first.html', active_tab='first', item="")
 
 @app.route('/choice', methods=['GET'])
-def first():
+def choice():
     # html 파일에 전달할 데이터 Context
     #context = {}
 
