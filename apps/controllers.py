@@ -44,11 +44,12 @@ def article_list():
     return render_template('home_show.html', context=context, active_tab='home_show')
 
 
-@app.route('/home_gong/', methods=['GET'])
+@app.route('/home_gong', methods=['GET'])
 def mypage_list():
     user_id = session['user_id']
     context={}
     context['mypage_list']=Article.query.order_by(desc(Article.date_created)).get(user_id).all()
+    
     return render_template("home_gong.html", context=context, active_tab = 'gongbang')
 #
 # @index & article list
