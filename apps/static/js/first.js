@@ -1,220 +1,157 @@
-;( function( $, window, undefined ) {
- 
-    'use strict';
- 
-    // global
-    var Modernizr = window.Modernizr;
- 
-    $.CBPFWSlider = function( options, element ) {
-        this.$el = $( element );
-        this._init( options );
-    };
- 
-    // the options
-    $.CBPFWSlider.defaults = {
-        // default transition speed (ms)
-        speed : 500,
-        // default transition easing
-        easing : 'ease'
-    };
- 
-    $.CBPFWSlider.prototype = {
-        _init : function( options ) {
-            // options
-            this.options = $.extend( true, {}, $.CBPFWSlider.defaults, options );
-            // cache some elements and initialize some variables
-            this._config();
-            // initialize/bind the events
-            this._initEvents();
-        },
-        _config : function() {
- 
-            // the list of items
-            this.$list = this.$el.children( 'ul' );
-            // the items (li elements)
-            this.$items = this.$list.children( 'li' );
-            // total number of items
-            this.itemsCount = this.$items.length;
-            // support for CSS Transitions & transforms
-            this.support = Modernizr.csstransitions && Modernizr.csstransforms;
-            this.support3d = Modernizr.csstransforms3d;
-            // transition end event name and transform name
-            var transProperties = {
-                'WebkitTransition' : { transitionEndEvent : 'webkitTransitionEnd', tranformName : '-webkit-transform' },
-                'MozTransition' : { transitionEndEvent : 'transitionend', tranformName : '-moz-transform' },
-                'OTransition' : { transitionEndEvent : 'oTransitionEnd', tranformName : '-o-transform' },
-                'msTransition' : { transitionEndEvent : 'MSTransitionEnd', tranformName : '-ms-transform' },
-                'transition' : { transitionEndEvent : 'transitionend', tranformName : 'transform' }
-            };
-            if( this.support ) {
-                this.transEndEventName = transProperties[ Modernizr.prefixed( 'transition' ) ].transitionEndEvent + '.cbpFWSlider';
-                this.transformName = transProperties[ Modernizr.prefixed( 'transition' ) ].tranformName;
-            }
-            // current and old item´s index
-            this.current = 0;
-            this.old = 0;
-            // check if the list is currently moving
-            this.isAnimating = false;
-            // the list (ul) will have a width of 100% x itemsCount
-            this.$list.css( 'width', 100 * this.itemsCount + '%' );
-            // apply the transition
-            if( this.support ) {
-                this.$list.css( 'transition', this.transformName + ' ' + this.options.speed + 'ms ' + this.options.easing );
-            }
-            // each item will have a width of 100 / itemsCount
-            this.$items.css( 'width', 100 / this.itemsCount + '%' );
-            // add navigation arrows and the navigation dots if there is more than 1 item
-            if( this.itemsCount > 1 ) {
- 
-                // add navigation arrows (the previous arrow is not shown initially):
-                this.$navPrev = $( '<span class="cbp-fwprev"><</span>' ).hide();
-                this.$navNext = $( '<span class="cbp-fwnext">></span>' );
-                $( '<nav/>' ).append( this.$navPrev, this.$navNext ).appendTo( this.$el );
-                // add navigation dots
-                var dots = '';
-                for( var i = 0; i < this.itemsCount; ++i ) {
-                    // current dot will have the class cbp-fwcurrent
-                    var dot = i === this.current ? '<span class="cbp-fwcurrent"></span>' : '<span></span>';
-                    dots += dot;
-                }
-                var navDots = $( '<div class="cbp-fwdots"/>' ).append( dots ).appendTo( this.$el );
-                this.$navDots = navDots.children( 'span' );
- 
-            }
- 
-        },
-        _initEvents : function() {
-             
-            var self = this;
-            if( this.itemsCount > 1 ) {
-                this.$navPrev.on( 'click.cbpFWSlider', $.proxy( this._navigate, this, 'previous' ) );
-                this.$navNext.on( 'click.cbpFWSlider', $.proxy( this._navigate, this, 'next' ) );
-                this.$navDots.on( 'click.cbpFWSlider', function() { self._jump( $( this ).index() ); } );
-            }
- 
-        },
-        _navigate : function( direction ) {
- 
-            // do nothing if the list is currently moving
-            if( this.isAnimating ) {
-                return false;
-            }
- 
-            this.isAnimating = true;
-            // update old and current values
-            this.old = this.current;
-            if( direction === 'next' && this.current < this.itemsCount - 1 ) {
-                ++this.current;
-            }
-            else if( direction === 'previous' && this.current > 0 ) {
-                --this.current;
-            }
-            // slide
-            this._slide();
- 
-        },
-        _slide : function() {
- 
-            // check which navigation arrows should be shown
-            this._toggleNavControls();
-            // translate value
-            var translateVal = -1 * this.current * 100 / this.itemsCount;
-            if( this.support ) {
-                this.$list.css( 'transform', this.support3d ? 'translate3d(' + translateVal + '%,0,0)' : 'translate(' + translateVal + '%)' );
-            }
-            else {
-                this.$list.css( 'margin-left', -1 * this.current * 100 + '%' ); 
-            }
-             
-            var transitionendfn = $.proxy( function() {
-                this.isAnimating = false;
-            }, this );
- 
-            if( this.support ) {
-                this.$list.on( this.transEndEventName, $.proxy( transitionendfn, this ) );
-            }
-            else {
-                transitionendfn.call();
-            }
- 
-        },
-        _toggleNavControls : function() {
- 
-            // if the current item is the first one in the list, the left arrow is not shown
-            // if the current item is the last one in the list, the right arrow is not shown
-            switch( this.current ) {
-                case 0 : this.$navNext.show(); this.$navPrev.hide(); break;
-                case this.itemsCount - 1 : this.$navNext.hide(); this.$navPrev.show(); break;
-                default : this.$navNext.show(); this.$navPrev.show(); break;
-            }
-            // highlight navigation dot
-            this.$navDots.eq( this.old ).removeClass( 'cbp-fwcurrent' ).end().eq( this.current ).addClass( 'cbp-fwcurrent' );
- 
-        },
-        _jump : function( position ) {
- 
-            // do nothing if clicking on the current dot, or if the list is currently moving
-            if( position === this.current || this.isAnimating ) {
-                return false;
-            }
-            this.isAnimating = true;
-            // update old and current values
-            this.old = this.current;
-            this.current = position;
-            // slide
-            this._slide();
- 
-        },
-        destroy : function() {
- 
-            if( this.itemsCount > 1 ) {
-                this.$navPrev.parent().remove();
-                this.$navDots.parent().remove();
-            }
-            this.$list.css( 'width', 'auto' );
-            if( this.support ) {
-                this.$list.css( 'transition', 'none' );
-            }
-            this.$items.css( 'width', 'auto' );
- 
+BoxesFx.prototype._init = function() {
+    // set transforms configuration
+    this._setTransforms();
+    // which effect
+    this.effect = this.el.getAttribute( 'data-effect' ) || 'effect-1';
+    // check if animating
+    this.isAnimating = false;
+    // the panels
+    this.panels = [].slice.call( this.el.querySelectorAll( '.panel' ) );
+    // total number of panels (4 for this demo)
+    //this.panelsCount = this.panels.length;
+    this.panelsCount = 4;
+    // current panel´s index
+    this.current = 0;
+    classie.add( this.panels[0], 'current' );
+    // replace image with 4 divs, each including the image
+    var self = this;
+    this.panels.forEach( function( panel ) {
+        var img = panel.querySelector( 'img' ), imgReplacement = '';
+        for( var i = 0; i < self.panelsCount; ++i ) {
+            imgReplacement += '<div class="bg-tile"><div class="bg-img"><img src="' + img.src + '" /></div></div>'
         }
-    };
- 
-    var logError = function( message ) {
-        if ( window.console ) {
-            window.console.error( message );
+        panel.removeChild( img );
+        panel.innerHTML = imgReplacement + panel.innerHTML;
+    } );
+    // add navigation element
+    this.nav = document.createElement( 'nav' );
+    this.nav.innerHTML = '<span class="prev"><i></i></span><span class="next"><i></i></span>';
+    this.el.appendChild( this.nav );
+    // initialize events
+    this._initEvents();
+}
+
+BoxesFx.prototype._setTransforms = function() {
+    this.transforms = {
+        'effect-1' : {
+            'next' : [
+                'translate3d(0, ' + (win.height/2+10) + 'px, 0)', // transforms for panel 1
+                'translate3d(-' + (win.width/2+10) + 'px, 0, 0)', // transforms for panel 2
+                'translate3d(' + (win.width/2+10) + 'px, 0, 0)', // transforms for panel 3
+                'translate3d(0, -' + (win.height/2+10) + 'px, 0)' // transforms for panel 4
+            ],
+            'prev' : [
+                'translate3d(' + (win.width/2+10) + 'px, 0, 0)',
+                'translate3d(0, ' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0, -' + (win.height/2+10) + 'px, 0)',
+                'translate3d(-' + (win.width/2+10) + 'px, 0, 0)'
+            ]
+        },
+        'effect-2' : {
+            'next' : [
+                'translate3d(-' + (win.width/2+10) + 'px, 0, 0)',
+                'translate3d(' + (win.width/2+10) + 'px, 0, 0)',
+                'translate3d(-' + (win.width/2+10) + 'px, 0, 0)',
+                'translate3d(' + (win.width/2+10) + 'px, 0, 0)'
+            ],
+            'prev' : [
+                'translate3d(0,-' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,-' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,' + (win.height/2+10) + 'px, 0)'
+            ]
+        },
+        'effect-3' : {
+            'next' : [
+                'translate3d(0,' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,' + (win.height/2+10) + 'px, 0)'
+            ],
+            'prev' : [
+                'translate3d(0,-' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,-' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,-' + (win.height/2+10) + 'px, 0)',
+                'translate3d(0,-' + (win.height/2+10) + 'px, 0)'
+            ]
         }
-    };
+    };  
+}
+
+BoxesFx.prototype._initEvents = function() {
+    var self = this, navctrls = this.nav.children;
+    // previous action
+    navctrls[0].addEventListener( 'click', function() { self._navigate('prev') } );
+    // next action
+    navctrls[1].addEventListener( 'click', function() { self._navigate('next') } );
+    // window resize
+    window.addEventListener( 'resize', function() { self._resizeHandler(); } );
+}
+
+BoxesFx.prototype._navigate = function( dir ) {
+    if( this.isAnimating ) return false;
+    this.isAnimating = true;
  
-    $.fn.cbpFWSlider = function( options ) {
-        if ( typeof options === 'string' ) {
-            var args = Array.prototype.slice.call( arguments, 1 );
-            this.each(function() {
-                var instance = $.data( this, 'cbpFWSlider' );
-                if ( !instance ) {
-                    logError( "cannot call methods on cbpFWSlider prior to initialization; " +
-                    "attempted to call method '" + options + "'" );
-                    return;
-                }
-                if ( !$.isFunction( instance[options] ) || options.charAt(0) === "_" ) {
-                    logError( "no such method '" + options + "' for cbpFWSlider instance" );
-                    return;
-                }
-                instance[ options ].apply( instance, args );
-            });
-        } 
-        else {
-            this.each(function() {  
-                var instance = $.data( this, 'cbpFWSlider' );
-                if ( instance ) {
-                    instance._init();
-                }
-                else {
-                    instance = $.data( this, 'cbpFWSlider', new $.CBPFWSlider( options, this ) );
-                }
-            });
-        }
-        return this;
-    };
+    var self = this, currentPanel = this.panels[ this.current ];
  
-} )( jQuery, window );
+    if( dir === 'next' ) {
+        this.current = this.current < this.panelsCount - 1 ? this.current + 1 : 0;           
+    }
+    else {
+        this.current = this.current > 0 ? this.current - 1 : this.panelsCount - 1;
+    }
+ 
+    // next panel to be shown
+    var nextPanel = this.panels[ this.current ];
+    // add class active to the next panel to trigger its animation
+    classie.add( nextPanel, 'active' );
+    // apply the transforms to the current panel
+    this._applyTransforms( currentPanel, dir );
+ 
+    // let´s track the number of transitions ended per panel
+    var cntTransTotal = 0,
+         
+        // transition end event function
+        onEndTransitionFn = function( ev ) {
+            if( ev && !classie.has( ev.target, 'bg-img' ) ) return false;
+ 
+            // return if not all panel transitions ended
+            ++cntTransTotal;
+            if( cntTransTotal < self.panelsCount ) return false;
+ 
+            if( support.transitions ) {
+                this.removeEventListener( transEndEventName, onEndTransitionFn );
+            }
+ 
+            // remove current class from current panel and add it to the next one
+            classie.remove( currentPanel, 'current' );
+            classie.add( nextPanel, 'current' );
+            // reset transforms for the currentPanel
+            self._resetTransforms( currentPanel );
+            // remove class active
+            classie.remove( nextPanel, 'active' );
+            self.isAnimating = false;
+        };
+ 
+    if( support.transitions ) {
+        currentPanel.addEventListener( transEndEventName, onEndTransitionFn );
+    }
+    else {
+        onEndTransitionFn();
+    }
+}
+ 
+BoxesFx.prototype._applyTransforms = function( panel, dir ) {
+    var self = this;
+    [].slice.call( panel.querySelectorAll( 'div.bg-img' ) ).forEach( function( tile, pos ) {
+        tile.style.WebkitTransform = self.transforms[self.effect][dir][pos];
+        tile.style.transform = self.transforms[self.effect][dir][pos];
+    } );
+}
+ 
+BoxesFx.prototype._resetTransforms = function( panel ) {
+    [].slice.call( panel.querySelectorAll( 'div.bg-img' ) ).forEach( function( tile ) {
+        tile.style.WebkitTransform = 'none';
+        tile.style.transform = 'none';
+    } );
+}
