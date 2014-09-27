@@ -5,18 +5,23 @@
         </div>
         <ul class="nav navbar-nav menuright">
          	{% if active_tab == 'home_show' %} 
-          	<li class="active"><a href="{{ url_for('article_list') }}">공방 가기</a></li>
+          	<li class="active"><a href="{{ url_for('home_gong') }}">공방 가기</a></li>
        	    {% endif %}
             {% if active_tab == 'gongbang' %}
-            <li class="active"><a href="{{ url_for('article_create') }}">진열장 가기</a></li>
+            <li class="active"><a href="{{ url_for('article_list') }}">진열장 가기</a></li>
             {% endif %}
             {% if active_tab == 'article_create' %}
             <li class="active"><a href="{{ url_for('article_create') }}">
             글쓰기</a></li>
             {% endif %}
 
-            <li><div class="circle nevmenu menubtnred"></div></li>
-            <li><div class="circle nevmenu menubtnblue"></div></li>
+            <li><div class="circle">
+                <h1>공방가기</h1></div></li>
+            <li><div class="circle">
+                <h1>진열장가기</h1></div></li>
+            <li><div class="circle_nevmenu_menubtnred"></div></li>
+            <li><div class="circle_nevmenu_menubtnblue"></div></li>
+            
         </ul>
         {% if active_tab == 'home_show' %} 
         <div class="jumbotron"> 
