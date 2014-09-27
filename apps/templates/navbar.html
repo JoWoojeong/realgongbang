@@ -5,10 +5,10 @@
         </div>
         <ul class="nav navbar-nav menuright">
          	{% if active_tab == 'home_show' %} 
-          	<li class="active"><a href="{{ url_for('article_list') }}">진열장으로 가기</a></li>
+          	<li class="active"><a href="{{ url_for('article_list') }}">공방 가기</a></li>
        	    {% endif %}
             {% if active_tab == 'gongbang' %}
-            <li class="active"><a href="{{ url_for('article_create') }}">공방으로 가기</a></li>
+            <li class="active"><a href="{{ url_for('article_create') }}">진열장 가기</a></li>
             {% endif %}
             <li><div class="circle nevmenu menubtnred"></div></li>
             <li><div class="circle nevmenu menubtnblue"></div></li>

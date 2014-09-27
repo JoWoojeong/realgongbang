@@ -26,12 +26,12 @@ class Photo(db.Model):
 @app.route('/', methods=['GET'])
 def first():
     # html 파일에 전달할 데이터 Context
-    context = {}
+    #context = {}
 
     # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
    # context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
 
-    return render_template('main/first.html', context=context, active_tab='first')
+    return render_template('main/first.html', active_tab='first')
 
 @app.route('/home_show', methods=['GET'])
 def article_list():
@@ -41,7 +41,7 @@ def article_list():
     # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
     context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
 
-    return render_template('main/home_show.html', context=context, active_tab='home_show')
+    return render_template('home_show.html', context=context, active_tab='home_show')
 
 #
 # @index & article list
