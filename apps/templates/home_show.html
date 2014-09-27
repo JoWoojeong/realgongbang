@@ -4,6 +4,21 @@
     <div class="llArticleList">
         {% if context.article_list %}
             {% for article in context.article_list %}
+                
+                
+                <section class="grid-wrap">
+                    <ul class="grid swipe-right" id="grid">
+                        <li class="title-box">
+                            <h2>Illustrations by <a href="http://ryotakemasa.com/">Ryo Takemasa</a></h2>
+                        </li>
+                        <li><a href="#"><img src="img/1.jpg" alt="img01"><h3>Kenpo News April 2014 issue</h3></a></li>
+                        <li><a href="#"><img src="img/2.jpg" alt="img02"><h3>SQUET April 2014 issue</h3></a></li>
+                        <li><!-- ... --></li>
+                            <!-- ... -->
+                    </ul>
+                </section>
+                
+
                 <div class="img-thumbnail" id="article_{{ article.id }}">
                     <div id="overlay" class="polaroid">
                         <div>   </div>

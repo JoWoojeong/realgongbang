@@ -5,10 +5,10 @@
         </div>
         <ul class="nav navbar-nav menuright">
          	{% if active_tab == 'home_show' %} 
-          	<li class="active"><a href="{{ url_for('home_gong') }}">공방 가기</a></li>
+          	<li class="active"><a href="{{ url_for('home_gong') }}"><h5>공방 가기</h5></a></li>
        	    {% endif %}
             {% if active_tab == 'gongbang' %}
-            <li class="active"><a href="{{ url_for('article_list') }}">진열장 가기</a></li>
+            <li class="active"><a href="{{ url_for('article_list') }}"><h5>진열장 가기</h5></a></li>
             {% endif %}
             {% if active_tab == 'article_create' %}
             <li class="active"><a href="{{ url_for('article_create') }}">
@@ -16,9 +16,9 @@
             {% endif %}
             <div class="topbar">
                 <li><div class="circle">
-                    <h1>공방가기</h1></div></li>
+                    </div><h1>공방가기</h1></li>
                 <li><div class="circle">
-                    <h1>진열장가기</h1></div></li>
+                    </div><h1>진열장가기</h1></li>
                 <li><div class="circle_nevmenu_menubtnred"></div></li>
                 <li><div class="circle_nevmenu_menubtnblue"></div></li>
             </div>
