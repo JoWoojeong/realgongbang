@@ -93,10 +93,7 @@ html {
     height: 100%;
     /*Image only BG fallback*/
     background: url('/static/images/first-back.jpg')no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        background-opacity: 20;
+    background-size: contain;
+    background-opacity: 20;
 
 }
