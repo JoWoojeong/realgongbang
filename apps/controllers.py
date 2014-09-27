@@ -42,6 +42,18 @@ def first():
     #context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
     return render_template('main/first.html', active_tab='first', item="")
 
+@app.route('/choice', methods=['GET'])
+def first():
+    # html 파일에 전달할 데이터 Context
+    #context = {}
+
+    # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
+    #context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
+    return render_template('main/choice.html', active_tab='choice', item="")
+
+
+
+
 @app.route('/home_show', methods=['GET'])
 def article_list():
     # html 파일에 전달할 데이터 Context
