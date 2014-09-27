@@ -240,7 +240,7 @@ def photo_get(blob_key):
 
 
 #우정이가 추가한 부분
-@app.route('/user/join/', methods=['GET', 'POST'])
+@app.route('/main/join/', methods=['GET', 'POST'])
 def user_join():
     form = JoinForm()
 
@@ -264,7 +264,7 @@ def user_join():
     #if GET
     return render_template('main/join.html', form=form, active_tab='user_join')
 
-@app.route('/user/login', methods=['GET','POST'])
+@app.route('/main/login', methods=['GET','POST'])
 def user_login():
     form = LoginForm()
 
