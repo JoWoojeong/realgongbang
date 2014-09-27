@@ -94,8 +94,9 @@ def article_create():
     photokey = None
     if request.method == 'POST':
         if form.validate_on_submit():
+            count = request.forms['count']
+            count2 = request.forms['count2']
             if form.photo.data:
-                print "form photo"
                 photodata = request.files['photo'].read()
                 upload_data = Photo()
                 upload_data.photo = db.Blob(photodata)
@@ -105,6 +106,7 @@ def article_create():
             # 사용자가 입력한 글 데이터로 Article 모델 인스턴스를 생성한다.
             article = Article(
                 title=form.title.data,
+                author=form.author.data,
                 category=form.category.data,
                 content=form.content.data,
                 photo=str(photokey)
@@ -115,10 +117,57 @@ def article_create():
             # 데이터베이스에 저장하라는 명령을 한다.
             mydb.session.commit()
 
+            for i in count:
+                photodata = request.files['process_photo_'+i].read()
+                upload_data = Photo()
+                upload_data.photo = db.Blob(photodata)
+                upload_data.put()
+                process_photokey = upload_data.key()
+
+                article = mydb.query.order_by(desc(Article.date_created)).one()
+
+                # 사용자가 입력한 글 데이터로 Article 모델 인스턴스를 생성한다.
+                process = Process(
+                    content= request.forms['process_content'+i],
+                    photo=str(process_photokey),
+                    A_id = article.id
+                )
+
+                # 데이터베이스에 데이터를 저장할 준비를 한다. (게시글)
+                mydb.session.add(process)
+                # 데이터베이스에 저장하라는 명령을 한다.
+                mydb.session.commit()
+
+                i+=1
+
+
+            for i in count2:
+                photodata = request.files['inspire_photo_'+i].read()
+                upload_data = Photo()
+                upload_data.photo = db.Blob(photodata)
+                upload_data.put()
+                inspire_photokey = upload_data.key()
+
+                article = mydb.query.order_by(desc(Article.date_created)).one()
+
+                # 사용자가 입력한 글 데이터로 Article 모델 인스턴스를 생성한다.
+                inspire = Inpire(
+                    photo=str(inspire_photokey),
+                    A_id = article.id
+                )
+
+                # 데이터베이스에 데이터를 저장할 준비를 한다. (게시글)
+                mydb.session.add(inspire)
+                # 데이터베이스에 저장하라는 명령을 한다.
+                mydb.session.commit()
+
+                i+=1
+
             flash(u'게시글을 작성하였습니다.', 'success')
             return redirect(url_for('article_list'))
 
-    return render_template('article/create.html', form=form, active_tab='article_create')
+    return render_template('article/create.html',form=form, active_tab='article_create')
+    
 
 
 @app.route('/article/detail/<int:id>', methods=['GET'])

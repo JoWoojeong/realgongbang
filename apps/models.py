@@ -29,17 +29,13 @@ class Article(mydb.Model):
 class Process(mydb.Model):
     id_P = mydb.Column(mydb.Integer, primary_key=True)
     content = mydb.Column(mydb.Text())
-    #key = 
-    A_id = mydb.Column(mydb.Integer, mydb.ForeignKey('article.id'))
-    article = mydb.relationship('Article',
-                              backref=mydb.backref('comments', cascade='all, delete-orphan', lazy='dynamic'))
+    photo = mydb.Column(mydb.Text(255))
+    A_id = mydb.Column(mydb.Integer)
 
 class Inspire(mydb.Model):
     id_I = mydb.Column(mydb.Integer, primary_key=True)
-    #key = 
-    A_id = mydb.Column(mydb.Integer, mydb.ForeignKey('article.id'))
-    article = mydb.relationship('Article',
-                              backref=mydb.backref('comments', cascade='all, delete-orphan', lazy='dynamic'))
+    photo = mydb.Column(mydb.Text(255))
+    A_id = mydb.Column(mydb.Integer)
 
 class Comment(mydb.Model):
     id_C = mydb.Column(mydb.Integer, primary_key=True)

@@ -22,8 +22,19 @@
             {% for field in form if field.widget.input_type != 'hidden' %}
                 {{ render_field(field, class="form-control") }}
             {% endfor %}
+            <input type = "hidden" id = "count" name = "count" value = "0"> 
+            <div id = "process">
+            </div>
+
+            <input type = "hidden" id = "count2" name = "count2" value = "0"> 
+            <div id = "inspire">
+            </div>
 
             <button type="submit" class="btn btn-default">글쓰기</button>
         </form>
+        <hr>
+        <button id = "add_process">과정 추가하기</button>
+        <hr>
+        <button id = "add_inspire">영감받은 사진 추가하기</button>
     </div>
 {% endblock %}
