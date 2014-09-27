@@ -264,7 +264,7 @@ def user_join():
     #if GET
     return render_template('main/join.html', form=form, active_tab='user_join')
 
-@app.route('/main/login', methods=['GET','POST'])
+@app.route('/main/login/', methods=['GET','POST'])
 def user_login():
     form = LoginForm()
 
@@ -286,7 +286,7 @@ def user_login():
                 flash(u'로그인 완료.', 'success')
                 return redirect(url_for('article_list'))
     #if GET
-    return render_template('user/login.html', form = form, active_tab='log_in')
+    return render_template('main/login.html', form = form, active_tab='log_in')
 
 @app.route('/logout')
 def log_out():
