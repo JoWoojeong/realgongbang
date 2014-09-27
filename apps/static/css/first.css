@@ -1,3 +1,7 @@
+.first_top {
+    height: :70;
+}
+
 html, body, .container {
     height: 100%;
 }
@@ -82,7 +86,8 @@ html, body, .container {
     transition: transform 1.1s ease-in-out;
 }
 
-.boxgallery[data-effect="effect-1"] .panel.active .bg-tile{
+.boxgallery[data-effect="effect-1"] .panel.active .bg-tile,
+.boxgallery[data-effect="effect-2"] .panel.active .bg-tile {
     animation: scaleDown 1.1s ease-in-out;
 }
  
@@ -105,4 +110,24 @@ html, body, .container {
  
 .boxgallery[data-effect="effect-2"] .panel.current .bg-tile:nth-child(4) .bg-img {
     transition-delay: 0.45s;
+}
+
+/* Variation 3 */
+ 
+.boxgallery[data-effect="effect-3"] .panel::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    content: '';
+    transition: opacity 1.1s ease-in-out;
+}
+ 
+.boxgallery[data-effect="effect-3"] .panel.current::after,
+.boxgallery[data-effect="effect-3"] .panel.active::after {
+    opacity: 0;
+}
+ 
+.boxgallery[data-effect="effect-3"] .panel.current::after {
+    transition: none;
 }
