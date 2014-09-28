@@ -51,12 +51,13 @@ def choice():
     #context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
     return render_template('main/choice.html', active_tab='choice', item="")
 
-@app.route('/home_gong/', methods=['GET'])
+@app.route('/home_gong', methods=['GET'])
 def home_gong():
     user_id = session['user_id']
     context={}
     context['mypage_list']=Article.query.order_by(desc(Article.date_created)).get(user_id).all()
-    return render_template("home_gong.html", context=context, active_tab = 'home_gong')
+
+    return render_template("main/home_gong.html", context=context, active_tab = 'home_gong')
 
 
 
@@ -68,7 +69,7 @@ def article_list():
     # Article 데이터 전부를 받아와서 최신글 순서대로 정렬하여 'article_list' 라는 key값으로 context에 저장한다.
     context['article_list'] = Article.query.order_by(desc(Article.date_created)).all()
 
-    return render_template('home_show.html', context=context, active_tab='home_show')
+    return render_template('main/home_show.html', context=context, active_tab='home_show')
 
 
 #
