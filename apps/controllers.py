@@ -268,7 +268,7 @@ def user_join():
                 user_id = form.user_id.data,
                 name=form.name.data,
                 email=form.email.data,
-                
+
                 password=generate_password_hash(form.password.data)
                 
             )
@@ -302,8 +302,8 @@ def user_login():
                 session['user_id'] = user.user_id
                 session['user_name'] = user.name
 
-                flash(u'로그인 완료.', 'success')
-                return redirect(url_for('article_list'))
+                #flash(u'로그인 완료.', 'success')
+                return redirect(url_for('choice'))
     #if GET
     return render_template('main/login.html', form = form, active_tab='user_login')
 
