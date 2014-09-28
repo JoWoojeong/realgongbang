@@ -18,7 +18,7 @@ BoxesFx.prototype._init = function() {
     this.panels.forEach( function( panel ) {
         var img = panel.querySelector( 'img' ), imgReplacement = '';
         for( var i = 0; i < self.panelsCount; ++i ) {
-            imgReplacement += '<div class="bg-tile"><div class="bg-img"><img src="'/static/img/01.jpg'" /></div></div>'
+            imgReplacement += '<div class="bg-tile"><div class="bg-img"><img src="/static/img/01.jpg" /></div></div>'
         }
         panel.removeChild( img );
         panel.innerHTML = imgReplacement + panel.innerHTML;

@@ -4,6 +4,8 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
+default_expiration: "1m"
+
 ### builtins: import appengine native builtin services ###
 builtins:
 - appstats: on
