@@ -269,7 +269,7 @@ def user_join():
                 user_id = form.user_id.data,
                 name=form.name.data,
                 email=form.email.data,
-
+                place_name=form.place_name.data,
                 password=generate_password_hash(form.password.data)
                 
             )
