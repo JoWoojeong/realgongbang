@@ -277,7 +277,7 @@ def user_join():
 
             #flash(u'가입이 완료 되었습니다.', 'success')
             #수정
-            return redirect(url_for('article_list'))
+            return redirect(url_for('user_login'))
 
     #if GET
     return render_template('main/join.html', form=form, active_tab='user_join')
@@ -310,7 +310,7 @@ def user_login():
 def log_out():
     session.clear()
     #if GET
-    return redirect(url_for('article_list'))
+    return redirect(url_for('first'))
 
 
 #
