@@ -12,8 +12,9 @@ class User(mydb.Model):
     user_id = mydb.Column(mydb.String(255), primary_key=True)
     name = mydb.Column(mydb.String(255))
     email = mydb.Column(mydb.String(255))
-    password = mydb.Column(mydb.String(255))
     place_name = mydb.Column(mydb.String(255))
+    password = mydb.Column(mydb.String(255))
+    
 
 
 #article 에 author 뺐습니다.
