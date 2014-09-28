@@ -99,7 +99,7 @@ def firstPage():
 #
 # @article controllers
 #
-@app.route('/article/create/', methods=['GET', 'POST'])
+@app.route('/article/create', methods=['GET', 'POST'])
 def article_create():
     form = ArticleForm()
     photokey = None
