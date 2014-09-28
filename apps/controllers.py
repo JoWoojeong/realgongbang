@@ -268,6 +268,7 @@ def user_join():
                 user_id = form.user_id.data,
                 name=form.name.data,
                 email=form.email.data,
+                
                 password=generate_password_hash(form.password.data)
                 
             )

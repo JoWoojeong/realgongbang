@@ -16,8 +16,6 @@ class User(mydb.Model):
     password = mydb.Column(mydb.String(255))
     
 
-
-#article 에 author 뺐습니다.
 class Article(mydb.Model):
     id = mydb.Column(mydb.Integer, primary_key=True)
     title = mydb.Column(mydb.String(255))
