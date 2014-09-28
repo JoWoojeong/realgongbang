@@ -1,29 +1,29 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Logo</a>
-        </div>
-        <ul class="nav navbar-nav menuright">
+
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <ul class="nav navbar-nav menuright">
             <div class="topbar">
-                 
-               <!-- <div class="circle"><li class="active"><a href="{{ url_for('home_gong') }}"></li><h5>공방가기</h5></a></div>
+                {% if active_tab == 'home_show' %} 
+                <div class="circle"><li class="active"><a href="{{ url_for('home_gong') }}"></a></li></div><h5>공방가기</h5>
                 {% endif %}
                 {% if active_tab == 'home_gong' %}
-                <div class="circle"><li class="active"><a href="{{ url_for('article_list') }}"></li><h5>진열장가기</h5></a></div>
+                <div class="circle"><li class="active"><a href="{{ url_for('article_list') }}"></a></li></div><h5>진열장가기</h5>
                 {% endif %}
                 {% if active_tab == 'home_show' %}
-                <div class="circle"><li class="active"><a href="{{ url_for('article_create') }}"></li><h5>글쓰기</h5></a></div>
-                {% endif %}-->
-                <li{% if active_tab == 'home_gong'%} class = "active" {% endif %}><a href = "{{ url_for('home_gong') }}"> 공방가기</a></li>
+                <div class="circle"><li class="active"><a href="{{ url_for('article_create') }}"></a></li></div><h5>글쓰기</h5>
+                {% endif %}
                 <li><div class="circle_nevmenu_menubtnred"></div></li>
                 <li><div class="circle_nevmenu_menubtnblue"></div></li>
             </div>
-        </ul>
-            {% if active_tab == 'home_show' %} 
-            <div class="jumbotron"> 
-                <div class="container"> <h1>진열장</h1> <p>show window</p> </div> 
-            </div> 
-            {% endif %}
+            </ul>
+                {% if active_tab == 'home_show' %} 
+                <div class="jumbotron"> 
+                    <div class="container"> <h1>진열장</h1> <p>show window</p> </div> 
+                </div> 
+                {% endif %}
 
-    </div>
-</nav>
+        </div>
+    </nav>
