@@ -1,86 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Gongbang</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/first.css">
-	<script src="static/js/first.js"></script>
-</head>
-<body>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+		<meta name="viewport" content="width=device-width, initial-scale=1"> -->
+		<title>Gongbang</title>
+		<!-- <meta name="description" content="Four Boxes Slideshow: Recreating the background image slideshow seen on Atelier Serge Thoroval's website" /> 
+		<meta name="keywords" content="background slideshow, boxes, background image, four panels, css, tutorial" />
+		<meta name="author" content="Codrops" />-->
+		<link rel="shortcut icon" href="../favicon.ico">
+		<!-- <link href='http://fonts.googleapis.com/css?family=Raleway:200,400,600' rel='stylesheet' type='text/css'> -->
+		<link rel="stylesheet" type="text/css" href="/static/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/component.css" />
+		<script src="/static/js/modernizr.custom.js"></script>
+	</head>
+	<body>
 
-	<div class="first_top">
-		<a href ="{{ url_for('user_login') }}"><img id="first_icon" src="/static/img/login.png"></a>
-		<a href ="{{ url_for('user_join') }}"><img id="first_icon" src="/static/img/join.png"></a>
-	</div>
+		<div class="first_top">
+			<a href ="{{ url_for('user_login') }}"><img id="first_icon" src="/static/img/login.png"></a>
+			<a href ="{{ url_for('user_join') }}"><img id="first_icon" src="/static/img/join.png"></a>
+		</div>
 
-	<div id="boxgallery" class="boxgallery e1" data-effect="effect-1">
-	    <div class="panel"><img src="/static/img/01.jpg" alt="/static/img/01.jpg"/></div>
-	    <div class="panel"><img src="/static/img/02.jpg" alt="/static/img/02.jpg"/></div>
-	    <div class="panel"><img src="/static/img/03.jpg" alt="/static/img/03.jpg"/></div>
-	    <div class="panel"><img src="/static/img/04.jpg" alt="/static/img/04.jpg"/></div>
-	</div>
+		<div class="container">
+			<!-- Top Navigation -->
+			<div>
 
-	<div id="boxgallery" class="boxgallery e1 " data-effect="effect-2">
-		<div class="panel current">
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/01.jpg" /></div>
 			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/01.jpg" /></div>
+			<div id="boxgallery" class="boxgallery" data-effect="effect-2">
+				<div class="panel"><img src="/static/img/01.jpg" /></div>
+				<div class="panel"><img src="/static/img/02.jpg" /></div>
+				<div class="panel"><img src="/static/img/03.jpg" /></div>
+				<div class="panel"><img src="/static/img/04.jpg" /></div>
 			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/01.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/01.jpg" /></div>
-			</div>
-		</div>
-		<div class="panel">
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/02.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/02.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/02.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/02.jpg" /></div>
-			</div>
-		</div>
-		<div class="panel">
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/03.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/03.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/03.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/03.jpg" /></div>
-			</div>
-		</div>
-		<div class="panel">
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/04.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/04.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/04.jpg" /></div>
-			</div>
-			<div class="bg-tile">
-				<div class="bg-img"><img src="/static/img/04.jpg" /></div>
-			</div>
-		</div>
-		<nav>
-			<span class="prev"><i></i></span>
-			<span class="next"><i></i></span>
-		</nav>
-	</div>
-</body>
+			<header class="codrops-header">
+				<h1>Gongbang <span>Gongbang. Welcome our website. <br> Did you have your own Atelier? We can give you gongbang. You can upload your picture-hand_made product-. And our website user can share their creation</span></h1>
+<!-- 				<nav class="codrops-demos">
+					<a href="index.html">Serge Thoroval</a>
+					<a class="current-demo" href="index2.html">Lateral</a>
+					<a href="index3.html">Fall</a>
+				</nav> -->
+			</header>
+		</div><!-- /container -->
+		<script src="/static/js/classie.js"></script>
+		<script src="/static/js/boxesFx.js"></script>
+		<script>
+			new BoxesFx( document.getElementById( 'boxgallery' ) );
+		</script>
+	</body>
 </html>
